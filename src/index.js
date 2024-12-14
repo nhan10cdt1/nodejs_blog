@@ -15,6 +15,13 @@ app.use(express.static(path.join(__dirname, "public")));
 // HTTP Logger (Ghi lại log các yêu cầu HTTP)
 app.use(morgan("combined")); // Sử dụng chế độ log "combined" của Morgan
 
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(express.json());
+
 // Cấu hình Template Engine
 app.engine("hbs", handlebars.engine({ extname: ".hbs" })); // Khởi tạo Handlebars làm template engine
 app.set("view engine", "hbs"); // Thiết lập Handlebars làm view engine
@@ -35,7 +42,7 @@ app.get("/search", (req, res) => {
   res.render("search"); // Render template "home.handlebars"
 });
 app.post("/search", (req, res) => {
-  console.log(req.query.q);
+  console.log(req.body.q);
   res.render("search"); // Render template "home.handlebars"
 });
 // Khởi động server và lắng nghe kết nối từ cổng `port`
