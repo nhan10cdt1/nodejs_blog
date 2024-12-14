@@ -30,6 +30,10 @@ app.get("/news", (req, res) => {
   res.render("news"); // Render template "home.handlebars"
 });
 
+app.get("/search", (req, res) => {
+  console.log(req.query.q);
+  res.render("search"); // Render template "home.handlebars"
+});
 // Khởi động server và lắng nghe kết nối từ cổng `port`
 // Sau khi server chạy, log thông báo xác nhận
 app.listen(port, () => {
