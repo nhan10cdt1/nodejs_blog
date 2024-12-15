@@ -1,13 +1,21 @@
+const Course = require("../models/Course");
+
 class SiteController {
     // [GET] /
     // Phương thức `index` xử lý các yêu cầu GET tới đường dẫn "/news".
-    index(req, res) {
-        // Sử dụng phương thức `res.render` để render view có tên "news".
-        res.render('home');
-    }
+    // [GET] /
+    index = async(req, res) => {
+        try {
+            const courses = await Course.find({});
+
+            res.json(courses);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    };
     //[GET] /search
     search(req, res) {
-        res.render('search');
+        res.render("search");
     }
 }
 
